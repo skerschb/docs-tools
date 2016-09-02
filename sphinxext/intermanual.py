@@ -385,6 +385,15 @@ def missing_reference(app, env, node, contnode):
         if len(contnode) and isinstance(contnode[0], nodes.Text):
             contnode[0] = nodes.Text(newtarget, contnode[0].rawsource)
 
+    # We couldn't resolve this reference, so report a warning.
+    # Sphinx won't resolve :program:`foo` in the page where .. program:: foo is
+    # defined, so we have a little heuristic to avoid warning in pages that
+    # look like they might define .. program:: foo.
+    target = node['reftarget']
+    pagename = node['refdoc'].split('/')[-1]
+    if not target.endswith(pagename):
+        app.warn('Missing reference in {}: {}'.format(node['refdoc'], target))
+
 
 def setup(app):
     app.add_config_value('intersphinx_mapping', {}, True)
