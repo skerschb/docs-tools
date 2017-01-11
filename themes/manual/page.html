@@ -74,7 +74,7 @@
                  $input.on('blur', function(e) {
                    if (!$input.val().length) { $div.addClass('narrow').removeClass('wide'); }
                  });
-                 $input.attr('placeholder', "Search docs.mongodb.com/manual");
+                 $input.attr('placeholder', "Search MongoDB Manual");
                  window.clearInterval(pollInput);
                }
              }, 10);
@@ -85,6 +85,7 @@
           s.parentNode.insertBefore(gcse, s);
         })();
       </script>
+      <gcse:searchbox-only resultsUrl="http://docs.mongodb.com/manual/search/" queryParameterName="query"></gcse:searchbox-only>
   {%- endif %}
 {%- endblock -%}
 
