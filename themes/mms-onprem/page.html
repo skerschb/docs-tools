@@ -40,8 +40,7 @@
 
 {%- block sitesearch %}
   {%- if builder != 'singlehtml' %}
-    {%- if theme_branch in (theme_manual_branch, 'master') %}
-      <script type="text/javascript">
+       <script type="text/javascript">
         (function() {
            var cx = '017938353964985089139:s4tijscdeac';
            var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
@@ -69,7 +68,6 @@
       </script>
            
       <gcse:searchbox-only resultsUrl="https://docs.opsmanager.mongodb.com/current/search" queryParameterName="query"></gcse:searchbox-only>
-    {%- endif %}
   {%- endif %}
 {%- endblock -%}
 
