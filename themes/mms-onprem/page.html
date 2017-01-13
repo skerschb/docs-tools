@@ -29,6 +29,15 @@
     {%- include "onprem-adblock.html" %}
 {%- endblock -%}
 
+{%- block topnav %}
+  {%- block subnav %} {% endblock %}
+
+  {%- block searchbox %}
+     <div class="search-db narrow pull-right"><gcse:searchbox-only resultsUrl="https://docs.opsmanager.mongodb.com/current/search/" queryParameterName="query"></gcse:searchbox-only></div>
+  {% endblock %}
+
+{% endblock %}
+
 {%- block sitesearch %}
   {%- if builder != 'singlehtml' %}
     {%- if theme_branch in (theme_manual_branch, 'master') %}
@@ -64,9 +73,6 @@
   {%- endif %}
 {%- endblock -%}
 
-{%- block searchbox %}
-<div class="search-db narrow pull-right"><gcse:searchbox-only resultsUrl="https://docs.opsmanager.mongodb.com/current/search/" queryParameterName="query"></gcse:searchbox-only></div>
-{% endblock %}
 
 
 {% block version_selector %}
