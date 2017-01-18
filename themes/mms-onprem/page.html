@@ -32,10 +32,6 @@
 {%- block topnav %}
   {%- block subnav %} {% endblock %}
 
-  {%- block searchbox %}
-     <div class="search-db narrow pull-right"><gcse:searchbox-only resultsUrl="https://docs.opsmanager.mongodb.com/current/search/" queryParameterName="query"></gcse:searchbox-only></div>
-  {% endblock %}
-
 {% endblock %}
 
 {%- block sitesearch %}
@@ -67,7 +63,7 @@
            })();
       </script>
            
-      <gcse:searchbox-only resultsUrl="https://docs.opsmanager.mongodb.com/current/search" queryParameterName="query"></gcse:searchbox-only>
+      <gcse:searchbox-only resultsUrl="https://docs.opsmanager.mongodb.com/current/search/" queryParameterName="query"></gcse:searchbox-only>
   {%- endif %}
 {%- endblock -%}
 
