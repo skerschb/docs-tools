@@ -1,23 +1,26 @@
 version:
   published:
     - '3.4'
+    - '3.6'
     - '3.2'
     - '3.0'
     - '2.6'
     - '2.4'
     - '2.2'
   active:
+    - '3.6'
     - '3.4'
     - '3.2'
     - '3.0'
     - '2.6'
   stable: '3.4'
-  upcoming: null
+  upcoming: '3.6'
 git:
   branches:
     manual: 'master'
     published:
       - 'master'
+      - 'wip-3.6'
       - 'v3.2'
       - 'v3.0'
       - 'v2.6'
