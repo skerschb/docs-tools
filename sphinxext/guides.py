@@ -18,17 +18,13 @@ GUIDE_CATEGORIES = {
     'Deep Dive': GuideCategory('Deep Dive', 'guide-category--deep-dive')
 }
 GUIDES_TEMPLATE = fett.Template('''
+:tocdepth: 2
+
 ====================================================================================================
 {{ title }}
 ====================================================================================================
 
 .. default-domain:: mongodb
-
-.. contents:: On this page
-   :local:
-   :backlinks: none
-   :depth: 1
-   :class: singlecol
 
 Author: {{ author }}
 
@@ -91,7 +87,7 @@ GUIDES_INDEX_TEMPLATE = fett.Template('''
          {{ if card.jumbo }}
          <div class="guide guide--jumbo">
            <div class="guide__title">{{ card.title }}</div>
-           <ol>
+           <ol class="guide__body">
            {{ for guide in card.guides }}
              <li><a href="{{ guide.docname }}{{ link_suffix }}">{{ guide.title }}</a></li>
            {{ end }}
@@ -100,6 +96,7 @@ GUIDES_INDEX_TEMPLATE = fett.Template('''
          {{ else }}
          <a class="guide" href="{{ card.docname }}{{ link_suffix }}">
            <div class="guide__title">{{ card.title }}</div>
+           <div class="guide__body"></div>
            <ul class="guide__pills">
            {{ for pill in card.pills }}
              <li>{{ pill }}</li>
@@ -288,7 +285,8 @@ class CardSet:
                 'truncated': False,
                 'title': category.title,
                 'cssclass': category.cssclass,
-                'columns': [[], [], []]
+                'columns': [[], [], []],
+                'n_guides': 0
             }
 
     def get_next_column(self, category_id):
@@ -298,6 +296,8 @@ class CardSet:
     def add_guide(self, env, guide, parent_card=None):
         env.included.add(guide['docname'])
         self.get_next_column(guide['category']).append(guide)
+        self.categories[guide['category']]['n_guides'] += 1
+
 
     def add_guides(self, env, guides, title):
         categories = {}
@@ -313,6 +313,7 @@ class CardSet:
             }
 
             self.get_next_column(category_name).append(card)
+            self.categories[category_name]['n_guides'] += 1
 
 
 class GuideIndexDirective(Directive):
@@ -342,10 +343,7 @@ class GuideIndexDirective(Directive):
                 guide = guides[previous_line]
                 cardset.add_guide(env, guide)
             else:
-                for docname in pending_card[0]['guides']:
-                    guide = guides[docname]
-
-                cardset_guides = [guides[docname] for docname in pending_card[0]['guides'] + [previous_line]]
+                cardset_guides = [guides[docname] for docname in pending_card[0]['guides']]
                 cardset.add_guides(env, cardset_guides, pending_card[0]['title'])
                 pending_card[0] = None
 
@@ -374,7 +372,7 @@ class GuideIndexDirective(Directive):
 
         try:
             rendered = GUIDES_INDEX_TEMPLATE.render({
-                'categories': list(cardset.categories.values()),
+                'categories': [cat for cat in cardset.categories.values() if cat['n_guides'] > 0],
                 'link_suffix': env.app.builder.link_suffix
             })
         except Exception as error:
