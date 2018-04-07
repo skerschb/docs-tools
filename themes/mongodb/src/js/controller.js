@@ -84,11 +84,13 @@ $(() => {
         }
     });
 
-    document.getElementById('showNav').onclick = () => {
-        document.getElementById('sphinxsidebar').style.display = 'block';
-        document.getElementById('left-column').style.display = 'flex';
-        document.getElementById('showNav').style.display = 'none';
-    };
+    if (document.getElementById('showNav') !== null) {
+        document.getElementById('showNav').onclick = () => {
+            document.getElementById('sphinxsidebar').style.display = 'block';
+            document.getElementById('left-column').style.display = 'flex';
+            document.getElementById('showNav').style.display = 'none';
+        };
+    }
 
     // Update dynamic page features
     fastNav.update();

@@ -9,60 +9,21 @@ URIWRITER_TEMPLATE = fett.Template('''
 .. raw:: html
 
    <p class="uriwriter">
-   
-   
-   <script type="text/javascript">
-               
-       //First, add this data to our cache
-             
-       function addRow() {
-           event.preventDefault();
-           const elements = document.getElementById('uriwriter').elements;
-           var formObj ={};
-           for(var i = 0 ; i < elements.length ; i++){
-               var item = elements.item(i);
-               formObj[item.name] = item.value;
-           }
-           
-           putFormDataInLocalStorage(formObj);
-           hollerStateChange();    
-       
-       }
-       
-       function putFormDataInLocalStorage(formdata) {
-           
-           if (null == formdata) {
-               console.log("Error persisting formdata");
-               return;
-           }
-        
-           localStorage.setItem('uriwriterForm', formdata);
-           
-       }
-       
-       function hollerStateChange() {
-           const event = new Event('uriwriter');
-           console.log("about to dispatch");
-           document.dispatchEvent(event);
-       }
-       
-       
-           
- 
-   </script>
    <form class="uriwriter" id="uriwriter" autocomplete="off">
-     <div id="userinfo" class="row">
+     <div class="serverinfo">Select your server deployment type:</div>
+     <div id="userinfo flex-container" class="row">
         <fieldset>
         <button id="uriwriter_env" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">choose
             <span class="caret"></span></button>
                 <ul id="uriwriter_sel" class="dropdown-menu">
-                    <li><a href="#">Standalone MongoDB</a></li>
-                    <li><a href="#">Atlas (Cloud)</a></li>
-                    <li><a href="#">Replica Set</a></li>
+                    <li><a href="#">self-managed MongoDB</a></li>
+                    <li><a href="#">Atlas (Cloud) -- Free Tier (3.4)</a></li>
+                     <li><a href="#">Atlas (Cloud) v. 3.6</a></li>
+                    <li><a href="#">replica set</a></li>
                 </ul>
         </fieldset>
         <fieldset>
-            <input id="uriwriter_username" type="text" name="username" required>
+            <input id="uriwriter_username" data-toggle="tooltip" title="username you will use to connect" type="text" name="username" required>
             <label for="username">Username</label>
         </fieldset>
         <fieldset>
@@ -70,20 +31,23 @@ URIWRITER_TEMPLATE = fett.Template('''
             <label for="db">Database name</label>
         </fieldset>
         <fieldset>
-            <input id="uriwriter_authdb" type="" name="authdb" required>
+            <input id="uriwriter_authdb" type="text" name="authdb" required>
             <label for="authdb">Authentication database</label>
         </fieldset>
+        <div id="options></div>
     </div>
+     <div class="serverinfo">Add Servers:</div>
     <div class="flex-container">
+       
         <fieldset class="hostgrid">
-            <input id="hostname" type="text" name="hostname" required>
+            <input id="hostname" type="text" name="hostname">
             <label for="hostname">Hostname or IP</label>
         </fieldset>
         <fieldset class="hostgrid">
-            <input id="port" type="text" name="port" required>
+            <input id="port" type="number" name="port">
             <label for="port">Port</label>
         </fieldset>
-        <fieldset class="hostgrid">
+        <fieldset class="hostbutton">
             <button id="uriwriter_act">+</button>
         </fieldset>
     </div>
@@ -92,7 +56,7 @@ URIWRITER_TEMPLATE = fett.Template('''
        <ul id="hostlist" style="list-style-type:none">
        </ul>
     </div>
-  </form>
+    <div id="uribox"><span id="uri"><CONNECTION_STRING></span></div>
    </p>
 ''')
 

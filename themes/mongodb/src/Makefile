@@ -1,6 +1,7 @@
 TARGETS=../static/mongodb-docs.css ../static/controller.js
 CSS_INPUTS=css/bootstrap-custom.css \
            css/icomoon.css \
+           css/uriwriter.css \
            css/font-awesome.css \
            css/mongodb-docs.css \
            css/feedback.css \
