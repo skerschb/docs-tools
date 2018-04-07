@@ -42,8 +42,8 @@ $(() => {
     fastNav.register(componentTabs);
     fastNav.register(componentVersionSelector);
     fastNav.register(componentThirdParty);
-    fastNav.register(componentUriwriter);
     fastNav.register(componentGuides);
+    fastNav.register(componentUriwriter);
 
     /* Hide toc if there aren't any items */
     if (!$('.toc > ul > li > ul > li').length) {
@@ -86,21 +86,14 @@ $(() => {
         }
     });
 
-<<<<<<< HEAD
-    if (document.getElementById('showNav') !== null) {
-        document.getElementById('showNav').onclick = () => {
-=======
     const showNavButton = document.getElementById('showNav');
     if (showNavButton) {
         showNavButton.onclick = () => {
->>>>>>> 9dd775dd532a6d0cba0a44fac7f11652951fcd7c
             document.getElementById('sphinxsidebar').style.display = 'block';
             document.getElementById('left-column').style.display = 'flex';
             document.getElementById('showNav').style.display = 'none';
         };
     }
-<<<<<<< HEAD
-=======
 
     const closeNavButton = document.getElementById('closeNav');
     if (closeNavButton) {
@@ -109,7 +102,6 @@ $(() => {
             document.getElementById('left-column').style.display = 'none';
         };
     }
->>>>>>> 9dd775dd532a6d0cba0a44fac7f11652951fcd7c
 
     // Update dynamic page features
     fastNav.update();
@@ -122,3 +114,4 @@ $(() => {
         }
     }
 });
+
