@@ -8,63 +8,37 @@ from docutils.utils.error_reporting import ErrorString
 URIWRITER_TEMPLATE = '''
 .. raw:: html
 
-   <p class="uriwriter">
    <form class="uriwriter__form" id="uriwriter" autocomplete="off">
-     <div class="uriwriter__form__instructions">Select your server deployment type:</div>
-     <div id="userinfo flex-container" class="row">
-        <fieldset>
-                <ul class="uriwriter__form__toggle">
-                    <li class="uriwriter__form__toggle__item">on-premise MongoDB</li>
-                    <li class="uriwriter__form__toggle__item">on-premise MongoDB with replica set</li>
-                    <li class="uriwriter__form__toggle__item">Atlas (Cloud)</li>
-                </ul>
-        </fieldset>
-        <div class="uriwriter__form__atlascontrols">
-            <div class="uriwriter__form__atlascontrols--statusmessage">
-            </div>
-            <div class="uriwriter__form__atlascontrols--detailsmessage">
-            </div>
-            <div class="uriwriter__form__atlascontrols--button" id="close">X</div>
-            <div class="uriwriter__form__atlascontrols--button" id="success">check</div>
-            <div class="uriwriter__form__atlascontrols--wrapper">
-                <div class="form_instructions">Paste your connection string here:</div>
-                    <textarea class="uriwriter__form__atlascontrols--paste" id="uriwriter_atlaspaste" rows="4" cols="100">
-                    </textarea>
-            </div>
-        </div>
-        <div id="userinfo_form">
-            <fieldset>
-                <input class="uriwriter__form__input" id="uriwriter_username" value='' data-toggle="tooltip" title="username you will use to connect" type="text" name="username" required>
-                <label class="uriwriter__form__input__label" for="username">Username</label>
-            </fieldset>
-            <fieldset>
-                <input class="uriwriter__form__input" id="uriwriter_db" value='' type="text" name="db" required>
-                <label class="uriwriter__form__input__label" for="db">Database name</label>
-            </fieldset>
-            <div class="uriwriter__form__options" id="options"></div>
-                <div class="uriwriter__form__instructions">Add Servers:</div>
-                    <div class="uriwriter__form__container">
-                        <fieldset class="uriwriter__form__input--hostgrid">
-                            <input class="input-uriwriter" id="hostname" type="text" name="hostname">
-                            <label for="hostname">Hostname or IP</label>
-                        </fieldset>
-                        <fieldset class="uriwriter__form__input--hostgrid">
-                            <input class="input-uriwriter" id="port" type="number" name="port">
-                            <label for="port">Port</label>
-                        </fieldset>
-                        <fieldset class="uriwriter__form__input--button">
-                            <button id="uriwriter_act">+</button>
-                        </fieldset>
-                    </div>
-                    <div id="uriwriter__form__buttonlist">
-                        <ul id="hostlist" style="uriwriter__form__buttonlist__item">
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-  </form>
-   </p>
+       <div class="mongodb-form__prompt">
+           <div class="mongodb-form__label">Server deployment type</div>
+           <ul class="guide__pills">
+               <li class="uriwriter__toggle guide__pill">on-premise MongoDB</li>
+               <li class="uriwriter__toggle guide__pill">on-premise MongoDB with replica set</li>
+               <li class="uriwriter__toggle guide__pill">Atlas (Cloud)</li>
+           </ul>
+       </div>
+       <label class="mongodb-form__prompt uriwriter__atlascontrols">
+           <div class="mongodb-form__label">Atlas connection string</div>
+           <div>
+               <textarea class="mongodb-form__input" id="uriwriter_atlaspaste" spellcheck=false rows="3" cols="50" placeholder='mongo "mongodb+srv://clustername.mongodb.net/test" --username user'></textarea>
+               <div class="atlascontrols__status mongodb-form__status"></div>
+           </div>
+       </label>
+       <div id="userinfo_form">
+           <label class="mongodb-form__prompt">
+               <div class="mongodb-form__label">Username</div>
+               <input class="mongodb-form__input" id="uriwriter_username" required>
+           </label>
+           <label class="mongodb-form__prompt">
+               <div class="mongodb-form__label">Database name</div>
+               <input class="mongodb-form__input" id="uriwriter_db" required>
+           </label>
+           <div class="mongodb-form__prompt" data-server-configuration>
+               <div class="mongodb-form__label">Servers</div>
+               <div id="hostlist"></div>
+           </div>
+       </div>
+   </form>
 '''
 
 class UriwriterDirective(Directive):
