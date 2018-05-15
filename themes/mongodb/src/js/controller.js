@@ -9,6 +9,7 @@ import * as componentPillStrip from './componentPillStrip';
 import * as componentSidebar from './componentSidebar';
 import * as componentTabs from './componentTabs';
 import * as componentThirdParty from './componentThirdParty';
+import * as componentUriWriter from './componentUriwriter';
 import * as componentVersionSelector from './componentVersionSelector';
 
 class FastNav {
@@ -45,6 +46,7 @@ $(() => {
     fastNav.register(componentThirdParty);
     fastNav.register(componentGuides);
     fastNav.register(componentOpenAPI);
+    fastNav.register(componentUriWriter);
 
     /* Hide toc if there aren't any items */
     if (!$('.toc > ul > li > ul > li').length) {
